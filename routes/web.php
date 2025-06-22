@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\{ HeroSliderController };
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::resource('hero-sliders', HeroSliderController::class);
+
 Route::group(['middleware' => 'auth'], function () {
+
     Route::get('{any}',[HomeController::class,'index']);
+
+
+
 });

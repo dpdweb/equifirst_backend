@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\HeroSliderController;
+use App\Http\Controllers\Api\SettingController;
+use App\Http\Controllers\Api\TeamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
+
+Route::get('/hero-sliders', [HeroSliderController::class, 'index']);
+Route::get('/teams', [TeamController::class, 'index']);
+
+Route::get('/settings', [SettingController::class, 'index']);

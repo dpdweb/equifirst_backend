@@ -48,7 +48,7 @@ File: Main Js File
     function initMenuItem() {
         $(".navbar-nav a").each(function () {
             var pageUrl = window.location.href.split(/[?#]/)[0];
-            if (this.href == pageUrl) { 
+            if (this.href == pageUrl) {
                 $(this).addClass("active");
                 $(this).parent().addClass("active");
                 $(this).parent().parent().addClass("active");
@@ -145,7 +145,7 @@ File: Main Js File
             }
         }
     }
-    
+
     function initComponents() {
         $(function () {
             $('[data-bs-toggle="tooltip"]').tooltip()
@@ -214,7 +214,7 @@ File: Main Js File
         initRightSidebar();
         initDropdownMenu();
         initComponents();
-        initSettings();
+        // initSettings();
         initPreloader();
         Waves.init();
     }
