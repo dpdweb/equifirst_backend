@@ -10,13 +10,22 @@ use App\Http\Resources\SettingResource;
 class SettingController extends Controller
 {
     public function index()
-        {
-            $settings = Setting::all();
-            $keyed = $settings->pluck('val', 'key');
+    {
+        $settings = Setting::all();
 
-            return response()->json($keyed);
-        }
+        $keyed = $settings->pluck(null, 'key')->map(function ($setting) {
+            if ($setting['url'] == 1 && !empty($setting['val'])) {
+                return asset('storage/' . $setting['val']);
+            }
+
+            return $setting['val'];
+        });
+
+        return response()->json($keyed);
+    }
 }
+
+
 
 
 

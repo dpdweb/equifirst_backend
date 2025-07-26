@@ -1,10 +1,14 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\HeroSliderController;
 use App\Http\Controllers\Api\SettingController;
 use App\Http\Controllers\Api\TeamController;
+use App\Http\Controllers\Api\FaqCategoryApiController;
+use App\Http\Controllers\Api\FaqApiController;
+use App\Http\Controllers\Api\BlogController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,5 +25,10 @@ use App\Http\Controllers\Api\TeamController;
 
 Route::get('/hero-sliders', [HeroSliderController::class, 'index']);
 Route::get('/teams', [TeamController::class, 'index']);
+
+Route::get('/categories', [FaqCategoryApiController::class, 'index']);
+Route::get('/faqs', [FaqApiController::class, 'index']);
+Route::get('/blogs', [BlogController::class, 'index']);
+
 
 Route::get('/settings', [SettingController::class, 'index']);

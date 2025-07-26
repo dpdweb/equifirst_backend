@@ -16,72 +16,45 @@
                     </a>
                 </li>
 
-              
-                <li class="menu-title">Extras</li>
-
                 <li>
-                    <a href="#" class="has-arrow waves-effect">
-                        <i class="ti-layout"></i>
-                        <span>Layouts</span>
+                    <a  href="{{ route('hero-slides.index') }}" class="waves-effect">
+                        <i class="ti-settings"></i>
+                        <span>Hero Sliders</span>
                     </a>
-                    <ul class="sub-menu" aria-expanded="true">
-                        <li>
-                            <a href="#" class="has-arrow">Vertical</a>
-                            <ul class="sub-menu" aria-expanded="true">
-                                <li><a href="layouts-light-sidebar">Light Sidebar</a></li>
-                                <li><a href="layouts-compact-sidebar">Compact Sidebar</a></li>
-                                <li><a href="layouts-icon-sidebar">Icon Sidebar</a></li>
-                                <li><a href="layouts-boxed">Boxed Layout</a></li>
-                                <li><a href="layouts-colored-sidebar">Colored Sidebar</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#" class="has-arrow">Horizontal</a>
-                            <ul class="sub-menu" aria-expanded="true">
-                                <li><a href="layouts-horizontal">Horizontal</a></li>
-                                <li><a href="layouts-hori-topbar-light">Light Topbar</a></li>
-                                <li><a href="layouts-hori-boxed">Boxed Layout</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                </li>
+                <li>
+                    <a  href="{{ route('teams.index') }}" class="waves-effect">
+                        <i class="ti-settings"></i>
+                        <span>Teams</span>
+                    </a>
+                </li>
+                <li>
+                    <a  href="{{ route('faq-categories.index') }}" class="waves-effect">
+                        <i class="ti-settings"></i>
+                        <span>FAQ Categories</span>
+                    </a>
+                </li>
+                <li>
+                    <a  href="{{ route('faqs.index') }}" class="waves-effect">
+                        <i class="ti-settings"></i>
+                        <span>FAQs</span>
+                    </a>
+                </li>
+                <li>
+                    <a  href="{{ route('posts.index') }}" class="waves-effect">
+                        <i class="ti-settings"></i>
+                        <span>Posts</span>
+                    </a>
                 </li>
 
 
-
                 <li>
-                    <a href="#" class="has-arrow waves-effect">
-                        <i class="ti-archive"></i>
-                        <span> Authentication </span>
+                    <a  href="{{ route('settings.index') }}" class="waves-effect">
+                        <i class="ti-settings"></i>
+                        <span>Settings</span>
                     </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="pages-login">Login 1</a></li>
-                        <li><a href="pages-login-2">Login 2</a></li>
-                        <li><a href="pages-register">Register 1</a></li>
-                        <li><a href="pages-register-2">Register 2</a></li>
-                        <li><a href="pages-recoverpw">Recover Password 1</a></li>
-                        <li><a href="pages-recoverpw-2">Recover Password 2</a></li>
-                        <li><a href="pages-lock-screen">Lock Screen 1</a></li>
-                        <li><a href="pages-lock-screen-2">Lock Screen 2</a></li>
-                    </ul>
                 </li>
 
-              
-
-                <li>
-                    <a href="#" class="has-arrow waves-effect">
-                        <i class="ti-more"></i>
-                        <span>Multi Level</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="true">
-                        <li><a href="#">Level 1.1</a></li>
-                        <li><a href="#" class="has-arrow">Level 1.2</a>
-                            <ul class="sub-menu" aria-expanded="true">
-                                <li><a href="#">Level 2.1</a></li>
-                                <li><a href="#">Level 2.2</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
 
             </ul>
         </div>

@@ -1,0 +1,22 @@
+
+.map-container { width: 100%; height: 400px;}
+
+.bg-xen-black { background-color: #147a9e !important; }
+.btn-primary { background-color: #147a9e !important; }
+.btn-primary:hover { background-color: #147a9e !important; }
+
+.account-pages .logo-admin { border-bottom: 2px solid #000000; }
+body[data-sidebar=dark] .vertical-menu { background-color: #147a9e !important; color:white !important;}
+body[data-sidebar=dark] .menu-title {color:white !important;}
+body[data-sidebar=dark] #sidebar-menu ul li a, body[data-sidebar=dark] #sidebar-menu ul li a i { color: white !important;}
+body[data-sidebar=dark] .navbar-brand-box { background-color:white !important; }
+/* #page-topbar { background-color: rgb(218, 218, 218) !important; } */
+/* .header-item, .header-item:hover {
+    color: #ffffff;
+}
+.noti-icon i {
+    color: #ffffff;
+} */
+
+.xen-bg-primary { background: #147a9e !important; }
+

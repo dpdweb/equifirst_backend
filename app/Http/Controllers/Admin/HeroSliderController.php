@@ -7,14 +7,15 @@ use App\Models\HeroSlider;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class HeroSliderController extends Controller
 {
-    protected $viewPath = 'admin.hero_sliders';
-    protected $routePath = 'hero-sliders';
-    protected $title = 'Hero Sliders';
-    protected $singular = "Hero Slider";
-    protected $plural = "Hero Sliders";
+    protected $viewPath = 'admin.hero_slide';
+    protected $routePath = 'hero-slides';
+    protected $title = 'Hero Slides';
+    protected $singular = "Hero Slide";
+    protected $plural = "Hero Slides";
 
     public function index()
     {
@@ -31,7 +32,13 @@ class HeroSliderController extends Controller
 
     public function create()
     {
-        return view('admin.hero_sliders.create');
+        return view("{$this->viewPath}.create", [
+            'title'     => "All {$this->title}",
+            'routePath'     => $this->routePath,
+            'singular'  => $this->singular,
+            'plural'    => $this->plural,
+
+        ]);
     }
 
 
@@ -43,7 +50,7 @@ class HeroSliderController extends Controller
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $filename = time().'_'.$image->getClientOriginalName();
+            $filename = time() . '_' . Str::random(6) . '.' . $image->getClientOriginalExtension();
             $imagePath = $image->storeAs('uploads/hero_sliders', $filename, 'public');
         }
 
@@ -52,7 +59,7 @@ class HeroSliderController extends Controller
             'image' => $imagePath, // Absolute path
         ]);
 
-        return redirect()->route('hero-sliders.index')->with('success', 'Hero Slider Updated!');
+        return redirect()->route("{$this->routePath}.index")->with('success', $this->singular . ' Created!');
     }
 
 
@@ -85,14 +92,21 @@ class HeroSliderController extends Controller
         $heroSlider->title = $request->title;
         $heroSlider->save();
 
-        return redirect()->route('hero-sliders.index')->with('success', 'Hero Slider Updated!');
+        return redirect()->route("{$this->routePath}.index")->with('success', $this->singular . ' Updated!');
     }
 
-    public function destroy(HeroSlider $heroSlider)
+    public function destroy(string $id)
     {
-        Storage::disk('public')->delete($heroSlider->image);
+        $heroSlider = HeroSlider::findOrFail($id);
+
+        if ($heroSlider->image)
+        {
+            Storage::disk('public')->delete($heroSlider->image);
+        }
+
         $heroSlider->delete();
 
-        return redirect()->route('hero-sliders.index')->with('success', 'Hero Slider Deleted!');
+        return redirect()->route("{$this->routePath}.index")->with('success', "{$this->singular} Deleted!");
+
     }
 }
