@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 29, 2025 at 08:42 PM
+-- Generation Time: Aug 06, 2025 at 06:53 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -127,7 +127,8 @@ INSERT INTO `faqs` (`id`, `faq_category_id`, `question`, `answer`, `created_at`,
 (50, 6, 'Sample Question 9 in Policies?', 'This is the answer to Sample Question 9 in Policies category.', '2025-07-15 14:18:30', '2025-07-15 14:18:30'),
 (51, 6, 'Sample Question 10 in Policies?', 'This is the answer to Sample Question 10 in Policies category.', '2025-07-15 14:18:30', '2025-07-15 14:18:30'),
 (52, 2, 'How can I delete my Working Ben account???', 'dfsdfdsfsdf', '2025-07-15 14:55:39', '2025-07-15 14:55:39'),
-(53, 4, 'How can I delete my Working Ben account???sasdas', 'dfdfdfdfsdf', '2025-07-15 14:55:49', '2025-07-15 15:02:44');
+(53, 4, 'How can I delete my Working Ben account???sasdas', 'dfdfdfdfsdf', '2025-07-15 14:55:49', '2025-07-15 15:02:44'),
+(55, 10, 'new q', 'new a', '2025-08-02 07:26:51', '2025-08-02 07:26:51');
 
 -- --------------------------------------------------------
 
@@ -153,7 +154,8 @@ INSERT INTO `faq_categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (4, 'Payments', '2025-07-15 14:18:30', '2025-07-15 14:18:30'),
 (5, 'Technical', '2025-07-15 14:18:30', '2025-07-15 14:18:30'),
 (6, 'Policies', '2025-07-15 14:18:30', '2025-07-15 14:18:30'),
-(8, 'twertw', '2025-07-16 13:02:42', '2025-07-16 13:02:42');
+(8, 'twertw', '2025-07-16 13:02:42', '2025-07-16 13:02:42'),
+(10, 'new cat', '2025-08-02 07:26:36', '2025-08-02 07:26:36');
 
 -- --------------------------------------------------------
 
@@ -385,7 +387,9 @@ INSERT INTO `posts` (`id`, `category_id`, `title`, `content`, `image`, `created_
 (39, 10, 'Sample Post Title 19', 'This is a dummy blog content for post number 19. mB7OdzNKjWZOCSLpSk3t82tvJWlhfFvEuHcKYlxFUhHsdV9ojViiKqOW2KSvZFOcN0T6RxEX8iEczznu0j0wgv0RLqNY76NUCcwZ', 'uploads/posts/1752690426_9r9gyW.jpg', '2025-06-16 15:07:23', '2025-06-16 15:07:23'),
 (40, 10, 'Sample Post Title 20', 'This is a dummy blog content for post number 20. 1ZiJyAIIt0mvFbQ7TeGiLMgmEMwyfpP1TTJLbIeWLHT3nypOXZWSfWtbn9D9eQ3Te07GIl7VCOTOkqCvlV67WULQ9hAPgEX1cBQ3', 'uploads/posts/1752690426_9r9gyW.jpg', '2025-06-16 15:07:23', '2025-06-16 15:07:23'),
 (47, NULL, 'da', '<p>dfsdfsfs</p>', 'uploads/posts/1752690426_9r9gyW.jpg', '2025-07-16 13:26:48', '2025-07-16 13:26:48'),
-(48, NULL, 'da', '<p>dfsdfsfs</p>', 'uploads/posts/1752690426_9r9gyW.jpg', '2025-07-16 13:27:06', '2025-07-16 13:27:06');
+(48, NULL, 'da', '<p>dfsdfsfs</p>', 'uploads/posts/1752690426_9r9gyW.jpg', '2025-07-16 13:27:06', '2025-07-16 13:27:06'),
+(49, NULL, 'ddfsd', '<p>test</p>', 'uploads/posts/1754137676_ufmoyo.jpg', '2025-08-02 07:27:56', '2025-08-02 07:27:56'),
+(50, NULL, 'ddfsd', '<p>test</p>', 'uploads/posts/1754137676_CkS6np.jpg', '2025-08-02 07:27:56', '2025-08-02 07:27:56');
 
 -- --------------------------------------------------------
 
@@ -505,8 +509,10 @@ CREATE TABLE `teams` (
 --
 
 INSERT INTO `teams` (`id`, `name`, `role`, `email`, `phone`, `description`, `created_at`, `updated_at`, `image`) VALUES
-(10, 'Mrs. Marie Pacocha Jr.', 'Entertainment Attendant', 'epagac@example.com', '+1-628-639-4778', 'Nesciunt repellat possimus ut facere dicta culpa quaerat. Rerum est placeat nam mollitia vitae sint. Totam magni voluptatem quaerat molestias voluptatem. Ipsam itaque qui culpa ut aut alias.', '2025-07-28 07:38:26', '2025-07-28 07:38:26', 'uploads/teams/1753706306_gGgAFs.png'),
-(11, 'Prof. Edna Schumm I', 'Mechanical Door Repairer', 'monica88@example.com', '+1 (820) 475-6778', 'Eveniet quis sit explicabo quidem doloremque iusto. Ut ut sit consequatur eos quis est. Fugiat velit voluptatem et atque in.', '2025-07-28 07:39:17', '2025-07-28 07:39:17', 'uploads/teams/1753706357_DTYHac.png');
+(10, 'Mrs. Marie Pacocha Jr. edit', 'Entertainment Attendant', 'epagac@example.com', 'uploads/teams/1753706306_gGgAFs.png', 'Nesciunt repellat possimus ut facere dicta culpa quaerat. Rerum est placeat nam mollitia vitae sint. Totam magni voluptatem quaerat molestias voluptatem. Ipsam itaque qui culpa ut aut alias.', '2025-07-28 07:38:26', '2025-08-02 07:24:32', 'uploads/teams/1753706306_gGgAFs.png'),
+(11, 'Prof. Edna Schumm I', 'Mechanical Door Repairer', 'monica88@example.com', '+1 (820) 475-6778', 'Eveniet quis sit explicabo quidem doloremque iusto. Ut ut sit consequatur eos quis est. Fugiat velit voluptatem et atque in.', '2025-07-28 07:39:17', '2025-07-28 07:39:17', 'uploads/teams/1753706357_DTYHac.png'),
+(12, 'Alejandrin Dietrich', 'Mechanical Engineering Technician', 'stuart.predovic@example.net', '+13464522937', 'Sit excepturi enim consequatur ea qui ut deleniti. Ut voluptate quo reiciendis nisi. Odio distinctio officia deleniti natus.', '2025-08-02 07:23:34', '2025-08-02 07:23:34', 'uploads/teams/1754137414_C3GbHm.jpg'),
+(13, 'Dr. Bridgette Casper Sr.', 'Metal Molding Operator', 'dach.evelyn@example.org', '1-559-335-7751', 'Necessitatibus illo dolorem qui officiis enim. Quae dolores tempora dignissimos autem et et unde voluptas.', '2025-08-02 07:24:59', '2025-08-02 07:24:59', 'uploads/teams/1754137499_UAeym1.jpg');
 
 -- --------------------------------------------------------
 
@@ -524,6 +530,13 @@ CREATE TABLE `testimonials` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `testimonials`
+--
+
+INSERT INTO `testimonials` (`id`, `name`, `designation`, `description`, `rating`, `image`, `created_at`, `updated_at`) VALUES
+(2, 'dfdsdasd', 'ff', 'ferwer', 5, 'uploads/testimonials/1753815553_cYfS3L.jpg', '2025-07-29 13:59:13', '2025-07-29 13:59:19');
 
 -- --------------------------------------------------------
 
@@ -691,13 +704,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `faqs`
 --
 ALTER TABLE `faqs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `faq_categories`
 --
 ALTER TABLE `faq_categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `hero_sliders`
@@ -727,7 +740,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `requests`
@@ -751,13 +764,13 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `teams`
 --
 ALTER TABLE `teams`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `testimonials`
 --
 ALTER TABLE `testimonials`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
