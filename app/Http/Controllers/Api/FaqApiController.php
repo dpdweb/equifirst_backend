@@ -16,7 +16,7 @@ class FaqApiController extends Controller
         ]);
 
         $categoryId = $request->input('category');
-        $perPage = 10;
+        $perPage = 20;
 
         $faqs = Faq::where('faq_category_id', $categoryId)
                     ->select('id', 'question', 'answer')

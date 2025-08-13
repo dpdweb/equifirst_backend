@@ -60,10 +60,23 @@
                                 @if ($record->image)
                                     <div class="mt-2">
                                         <p>Current Image:</p>
-                                        <img src="{{ asset('storage/' . $record->image) }}" alt="Post Image" class="img-thumbnail"
-                                            width="200">
+                                        <img src="{{ asset('storage/' . $record->image) }}" alt="Post Image"
+                                            class="img-thumbnail" width="200">
                                     </div>
                                 @endif
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="author_id">Select Author</label>
+                                <select name="author_id" id="author_id" class="form-control" required>
+                                    <option value="">-- Select Team --</option>
+                                    @foreach ($teams as $team)
+                                        <option value="{{ $team->id }}"
+                                            {{ (old('author_id') ?? ($record->author_id ?? '')) == $team->id ? 'selected' : '' }}>
+                                            {{ $team->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
 
 
@@ -77,7 +90,7 @@
 
     @endsection
     @section('scripts')
-            <script src="{{ URL::asset('assets/libs/tinymce/tinymce.min.js') }}"></script>
+        <script src="{{ URL::asset('assets/libs/tinymce/tinymce.min.js') }}"></script>
         <script src="{{ URL::asset('assets/js/pages/form-editor.init.js') }}"></script>
         <script src="{{ URL::asset('assets/js/app.js') }}"></script>
     @endsection

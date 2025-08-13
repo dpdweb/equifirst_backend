@@ -65,7 +65,20 @@
 
                             <div class="mb-3">
                                 <label for="image" class="form-label">Featured Image</label>
-                                <input type="file" name="image" class="form-control" value="{{ old('image') }}" required>
+                                <input type="file" name="image" class="form-control" value="{{ old('image') }}"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="author_id">Select Author</label>
+                                <select name="author_id" id="author_id" class="form-control" required>
+                                    <option value="">-- Select Team --</option>
+                                    @foreach ($teams as $team)
+                                        <option value="{{ $team->id }}"
+                                            {{ old('author_id') }}>
+                                            {{ $team->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <button type="submit" class="btn btn-primary">Submit</button>
@@ -79,9 +92,7 @@
 
     @endsection
     @section('scripts')
-
         <script src="{{ URL::asset('assets/libs/tinymce/tinymce.min.js') }}"></script>
         <script src="{{ URL::asset('assets/js/pages/form-editor.init.js') }}"></script>
         <script src="{{ URL::asset('assets/js/app.js') }}"></script>
-
     @endsection

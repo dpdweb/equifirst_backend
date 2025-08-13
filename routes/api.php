@@ -29,6 +29,9 @@ Route::get('/teams', [TeamController::class, 'index']);
 Route::get('/categories', [FaqCategoryApiController::class, 'index']);
 Route::get('/faqs', [FaqApiController::class, 'index']);
 Route::get('/blogs', [BlogController::class, 'index']);
+Route::get('/blogs/{slug}', [BlogController::class, 'show']);
+Route::post('/blogs/{slug}/increment-view', [BlogController::class, 'incrementView']);
+
 Route::get('/testimonials', [TestimonialController::class, 'index']);
 
 
