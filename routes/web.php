@@ -13,17 +13,18 @@ use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SettingController;
 
-// Redirect root of Laravel app to /admin/login
-Route::redirect('/', '/admin/login');
+// Check environment
+$prefix = app()->environment('production') ? 'admin' : '';
 
-// Auth routes but prefixed with /admin
-Auth::routes(['register' => false]);
+// Redirect root to login page
+Route::redirect('/', "/$prefix/login");
 
-Route::prefix('admin')->group(function () {
-
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
+// Auth routes with conditional prefix
+Route::prefix($prefix)->group(function () {
+    Auth::routes(['register' => false]);
 
     Route::middleware('auth')->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('hero-slides', HeroSliderController::class);
         Route::resource('teams', TeamController::class);
         Route::resource('categories', CategoryController::class);
@@ -40,3 +41,5 @@ Route::prefix('admin')->group(function () {
         Route::resource('/settings', SettingController::class);
     });
 });
+
+
