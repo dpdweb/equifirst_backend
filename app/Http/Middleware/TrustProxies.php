@@ -15,8 +15,6 @@ class TrustProxies extends Middleware
     /** Trust Nginx (or any) reverse proxy */
     protected $proxies = '*';
 
-    
-
     /**
      * The headers that should be used to detect proxies.
      *
@@ -27,6 +25,5 @@ class TrustProxies extends Middleware
         Request::HEADER_X_FORWARDED_HOST |
         Request::HEADER_X_FORWARDED_PORT |
         Request::HEADER_X_FORWARDED_PROTO |
-        Request::HEADER_X_FORWARDED_AWS_ELB |
-		 Request::HEADER_X_FORWARDED_ALL;
+        Request::HEADER_X_FORWARDED_AWS_ELB;
 }
