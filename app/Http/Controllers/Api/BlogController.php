@@ -1,32 +1,4 @@
 <?php
-
-// namespace App\Http\Controllers\Api;
-
-// use App\Http\Controllers\Controller;
-// use App\Models\Post;
-// use Illuminate\Http\Request;
-
-// class BlogController extends Controller
-// {
-//     public function index(Request $request)
-//     {
-//         $request->validate([
-//             'page' => 'sometimes|integer|min:1',
-//         ]);
-
-//         $perPage = 6;
-
-//         $blogs = Post::orderBy('created_at', 'desc')
-//                     ->paginate($perPage);
-
-//         // $blogs = Post::select('id', 'title', 'image', 'date', 'views')
-//         //             ->orderBy('date', 'desc')
-//         //             ->paginate($perPage);
-
-//         return response()->json($blogs);
-//     }
-// }
-
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -58,11 +30,15 @@ class BlogController extends Controller
             return response()->json(['message' => 'Post not found'], 404);
         }
 
+        // Force HTTPS for the image URLs
+        $imageUrl = str_replace('http://', 'https://', asset('storage/' . $post->image));
+        $authorImageUrl = str_replace('http://', 'https://', asset('storage/' . $post->author->image));
+
         return response()->json([
             'id'      => $post->id,
             'title'   => $post->title,
             'slug'    => $post->slug,
-            'image'   => asset('storage/' . $post->image),
+            'image'   => $imageUrl,  // HTTPS URL for blog image
             'date'    => $post->created_at->toDateString(),
             'views'   => $post->views,
             'content' => $post->content,
@@ -70,16 +46,13 @@ class BlogController extends Controller
                 'id'          => $post->author->id,
                 'name'        => $post->author->name,
                 'email'       => $post->author->email,
-                'image'       => asset('storage/' . $post->author->image),
+                'image'       => $authorImageUrl,  // HTTPS URL for author image
                 'role'        => $post->author->role,
-                // 'phone' => $post->author->phone,
                 'description' => $post->author->description,
-                // Add more author fields as needed
             ],
         ]);
     }
 
-    // App\Http\Controllers\BlogController.php
     public function incrementView($slug)
     {
         $blog        = Post::where('slug', $slug)->firstOrFail();
@@ -88,5 +61,4 @@ class BlogController extends Controller
 
         return response()->json(['success' => true, 'views' => $blog->views]);
     }
-
 }
