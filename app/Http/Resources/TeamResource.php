@@ -16,7 +16,7 @@ class TeamResource extends JsonResource
             'role'        => $this->role,
             'email'       => $this->email,
             'phone'       => $this->phone,
-            'description' => $this->description."asdasdadasd",
+            'description' => $this->description,
             'image'   => asset('storage/' . $this->image),
             'created_at'  => $this->created_at->toDateTimeString(),
             'updated_at'  => $this->updated_at->toDateTimeString(),
