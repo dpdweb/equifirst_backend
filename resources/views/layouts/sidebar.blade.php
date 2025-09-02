@@ -9,7 +9,7 @@
             <ul class="metismenu list-unstyled" id="side-menu">
                 <li class="menu-title">Main</li>
 
-                <li>
+                <li >
                     <a href="{{ route('dashboard') }}" class="waves-effect">
                         <i class="ti-home"></i>
                         <span>Dashboard</span>
@@ -29,8 +29,8 @@
                     </a>
                 </li>
 
-                <li class="mm-active">
-                    <a href="#" class="has-arrow waves-effect mm-active" aria-expanded="true">
+                <li>
+                    <a href="#" class="has-arrow waves-effect" aria-expanded="false">
                         <i class="ti-pencil-alt"></i>
                         <span>FAQs</span>
                     </a>
@@ -39,6 +39,8 @@
                         <li><a href="{{ route('faq-categories.index') }}">FAQ Categories</a></li>
                     </ul>
                 </li>
+
+
 
 
                 <li>
