@@ -66,6 +66,14 @@
                             </div>
 
 
+                            <div class="mb-3" bis_skin_checked="1">
+                                <label class="form-label" for="tiktok_url">TikTok</label>
+                                <div bis_skin_checked="1">
+                                    <input type="url" class="form-control" name="tiktok_url" id="tiktok_url" value="{{ old('tiktok_url', $settings['tiktok_url'] ?? '') }}">
+                                </div>
+                            </div>
+
+
 
 
                                 <div class="col-12" bis_skin_checked="1">

@@ -14,7 +14,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SettingController;
 
 // Check environment
-$prefix = app()->environment('production') ? 'admin' : '';
+$prefix = app()->environment('production') ? 'admin' : 'admin';
 
 // Redirect root to login page
 Route::redirect('/', "/$prefix/login");

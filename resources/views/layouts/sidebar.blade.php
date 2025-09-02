@@ -10,9 +10,9 @@
                 <li class="menu-title">Main</li>
 
                 <li>
-                    <a href="index" class="waves-effect">
+                    <a href="{{ route('dashboard') }}" class="waves-effect">
                         <i class="ti-home"></i>
-                        <span>Starter Page</span>
+                        <span>Dashboard</span>
                     </a>
                 </li>
 
@@ -24,31 +24,32 @@
                 </li> --}}
                 <li>
                     <a href="{{ route('teams.index') }}" class="waves-effect">
-                        <i class="ti-settings"></i>
+                        <i class="ti-user"></i>
                         <span>Teams</span>
                     </a>
                 </li>
-                <li>
-                    <a href="{{ route('faq-categories.index') }}" class="waves-effect">
-                        <i class="ti-settings"></i>
-                        <span>FAQ Categories</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('faqs.index') }}" class="waves-effect">
-                        <i class="ti-settings"></i>
+
+                <li class="mm-active">
+                    <a href="#" class="has-arrow waves-effect mm-active" aria-expanded="true">
+                        <i class="ti-pencil-alt"></i>
                         <span>FAQs</span>
                     </a>
+                    <ul class="sub-menu mm-collapse mm-show" aria-expanded="false" style="">
+                        <li><a href="{{ route('faqs.index') }}">FAQs</a></li>
+                        <li><a href="{{ route('faq-categories.index') }}">FAQ Categories</a></li>
+                    </ul>
                 </li>
+
+
                 <li>
                     <a href="{{ route('posts.index') }}" class="waves-effect">
-                        <i class="ti-settings"></i>
+                        <i class="ti-pencil"></i>
                         <span>Posts</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('testimonials.index') }}" class="waves-effect">
-                        <i class="ti-settings"></i>
+                        <i class="ti-user"></i>
                         <span>Testimonials</span>
                     </a>
                 </li>
