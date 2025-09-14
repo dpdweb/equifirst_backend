@@ -19,40 +19,46 @@ class BlogController extends Controller
         return BlogResource::collection($blogs);
     }
 
-public function show($slug)
-{
-    $post = Post::with('author')->where('slug', $slug)->first();
+    public function show($slug)
+    {
+        $post = Post::with('author')->where('slug', $slug)->first();
 
-    if (! $post) {
-        return response()->json(['message' => 'Post not found'], 404);
+        if (! $post) {
+            return response()->json(['message' => 'Post not found'], 404);
+        }
+
+        // Handle JSON or single string
+        $images = json_decode($post->image, true);
+
+        if (json_last_error() === JSON_ERROR_NONE && is_array($images)) {
+            $imageUrl = ! empty($images['large']) ? asset('storage/' . $images['large']) : null;
+        } else {
+            $imageUrl = $post->image ? asset('storage/' . $post->image) : null;
+        }
+
+        $authorData = null;
+        if ($post->author) {
+            $authorData = [
+                'id'          => $post->author->id,
+                'name'        => $post->author->name,
+                'email'       => $post->author->email,
+                'image'       => $post->author->image ? asset('storage/' . $post->author->image) : null,
+                'role'        => $post->author->role,
+                'description' => $post->author->description,
+            ];
+        }
+
+        return response()->json([
+            'id'      => $post->id,
+            'title'   => $post->title,
+            'slug'    => $post->slug,
+            'image'   => $imageUrl, // always "large" if JSON, otherwise raw image
+            'date'    => $post->created_at->toDateString(),
+            'views'   => $post->views,
+            'content' => $post->content,
+            'author'  => $authorData,
+        ]);
     }
-
-    $imageUrl = asset('storage/' . $post->image);
-
-    $authorData = null;
-    if ($post->author) {
-        $authorData = [
-            'id'          => $post->author->id,
-            'name'        => $post->author->name,
-            'email'       => $post->author->email,
-            'image'       => $post->author->image ? asset('storage/' . $post->author->image) : null,
-            'role'        => $post->author->role,
-            'description' => $post->author->description,
-        ];
-    }
-
-    return response()->json([
-        'id'      => $post->id,
-        'title'   => $post->title,
-        'slug'    => $post->slug,
-        'image'   => $imageUrl,
-        'date'    => $post->created_at->toDateString(),
-        'views'   => $post->views,
-        'content' => $post->content,
-        'author'  => $authorData, // null if no author
-    ]);
-}
-
 
     public function incrementView($slug)
     {

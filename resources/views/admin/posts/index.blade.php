@@ -53,17 +53,33 @@
                             </thead>
                             <tbody>
                                 @forelse($records as $record)
+                                    @php
+                                        $images = json_decode($record->image, true);
+
+                                        if (json_last_error() === JSON_ERROR_NONE && is_array($images)) {
+                                            $image = $images['small'] ?? '';
+                                        } else {
+                                            $image = $record->image;
+                                        }
+                                    @endphp
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $record->title }}</td>
-                                        <td><img src="{{ asset('storage/' . $record->image) }}" width="200" /></td>
                                         <td>
-                                            <a href="{{ route( $routePath . '.edit', $record) }}" class="text-success mx-2">
-                            <i class="fas fa-marker" aria-hidden="true"></i>
-                        </a>
-                        <a href="#" onclick="confirmDelete('{{ route( $routePath . '.destroy', $record) }}')" class="text-danger mx-2">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </a>
+                                            @if (!empty($image))
+                                                <img src="{{ asset('storage/' . $image) }}" width="200" />
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{ route($routePath . '.edit', $record) }}"
+                                                class="text-success mx-2">
+                                                <i class="fas fa-marker" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="#"
+                                                onclick="confirmDelete('{{ route($routePath . '.destroy', $record) }}')"
+                                                class="text-danger mx-2">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
 
                                         </td>
                                     </tr>
@@ -83,31 +99,36 @@
                         </script>
 
 
-                    <div class="modal fade" id="deleteConfirmationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="deleteConfirmationModalLabel">{{ $singular }} Delete Confirmation</h5>
-                                    </h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class="modal fade" id="deleteConfirmationModal" data-bs-backdrop="static"
+                            data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteConfirmationModalLabel">{{ $singular }}
+                                            Delete Confirmation</h5>
+                                        </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to delete this {{ $singular }}?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cancel</button>
+                                        <form id="deleteForm" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </div>
                                 </div>
-                                <div class="modal-body">
-                                    Are you sure you want to delete this {{ $singular }}?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                    <form id="deleteForm" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                    </form>
-                                </div>
+                                <!-- /.modal-content -->
                             </div>
-                            <!-- /.modal-content -->
+                            <!-- /.modal-dialog -->
                         </div>
-                        <!-- /.modal-dialog -->
-                    </div>
-                    <!-- /.modal -->
+                        <!-- /.modal -->
 
 
                     </div>

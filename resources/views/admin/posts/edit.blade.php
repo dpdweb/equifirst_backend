@@ -57,13 +57,26 @@
                                 <label for="image" class="form-label">Featured Image</label>
                                 <input type="file" name="image" class="form-control">
 
-                                @if ($record->image)
-                                    <div class="mt-2">
-                                        <p>Current Image:</p>
-                                        <img src="{{ asset('storage/' . $record->image) }}" alt="Post Image"
-                                            class="img-thumbnail" width="200">
-                                    </div>
-                                @endif
+@if ($record->image)
+    @php
+        $images = json_decode($record->image, true);
+
+        if (json_last_error() === JSON_ERROR_NONE && is_array($images)) {
+            $image = $images['small'] ?? '';
+        } else {
+            $image = $record->image;
+        }
+    @endphp
+
+    @if (!empty($image))
+        <div class="mt-2">
+            <p>Current Image:</p>
+            <img src="{{ asset('storage/' . $image) }}" alt="Post Image"
+                 class="img-thumbnail" width="200">
+        </div>
+    @endif
+@endif
+
                             </div>
 
                             <div class="mb-3">
