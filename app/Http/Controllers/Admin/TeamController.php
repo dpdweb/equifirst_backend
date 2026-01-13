@@ -18,7 +18,7 @@ class TeamController extends Controller
 
     public function index()
     {
-        $records = Team::all();
+        $records = Team::orderBy('sort_id', 'asc')->get();
 
         return view("{$this->viewPath}.index", [
             'records'   => $records,
