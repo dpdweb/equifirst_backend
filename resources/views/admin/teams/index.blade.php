@@ -41,10 +41,11 @@
                     </div>
 
                     <div class="row mb-3">
-                        <div class="col-md-9"></div>
-                        <div class="col-md-3">
-                            <a href="{{ route($routePath . '.create') }}" class="btn btn-primary float-end">Add New</a>
-                        </div>
+                        <div class="col-md-5"></div>
+                        <div class="col-md-7">
+    <a href="{{ route('teams.sort') }}" class="btn btn-primary float-end ms-2">Sort Teams</a>
+    <a href="{{ route($routePath . '.create') }}" class="btn btn-primary float-end ms-2">Add New</a>
+</div>
                     </div>
 
         <table id="datatable-grid" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="border-collapse: collapse; border-spacing: 0px; width: 100%;">

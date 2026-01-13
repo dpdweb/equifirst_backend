@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SettingController;
+use Illuminate\Support\Facades\Artisan;
 
 // Check environment
 $prefix = app()->environment('production') ? 'admin' : 'admin';
@@ -26,7 +27,12 @@ Route::prefix($prefix)->group(function () {
     Route::middleware('auth')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('hero-slides', HeroSliderController::class);
+
+        Route::get('teams/sort', [TeamController::class, 'sort'])->name('teams.sort');
+        Route::post('teams/sort-save', [TeamController::class, 'sortSave'])->name('teams.sort-save');
         Route::resource('teams', TeamController::class);
+
+
         Route::resource('categories', CategoryController::class);
         Route::resource('posts', PostController::class);
         Route::resource('faq-categories', FaqCategoryController::class);
@@ -40,6 +46,17 @@ Route::prefix($prefix)->group(function () {
         Route::get('/social-media-setting', [SettingController::class, 'social_media_setting'])->name('view.social-media-setting');
         Route::resource('/settings', SettingController::class);
     });
+});
+
+Route::get('/clear-cache', function() {
+
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('route:clear');
+    Artisan::call('view:clear');
+    Artisan::call('event:clear');
+
+    return "Cache cleared successfully!";
 });
 
 

@@ -133,4 +133,39 @@ class TeamController extends Controller
 
         return redirect()->route("{$this->routePath}.index")->with('success', "{$this->title} deleted successfully.");
     }
+
+    public function sort()
+    {
+
+        $records = Team::orderBy('sort_id', 'asc')->get();
+
+        return view("{$this->viewPath}.sort", [
+            'records'   => $records,
+            'title'     => "Sort {$this->title}",
+            'routePath' => $this->routePath,
+            'singular'  => $this->singular,
+            'plural'    => $this->plural,
+        ]);
+    }
+
+    public function sortSave(Request $request)
+    {
+        $request->validate([
+            'items' => 'required|array',
+            'items.*.id' => 'required|exists:teams,id',
+            'items.*.sort_id' => 'required|integer|min:0',
+        ]);
+
+        foreach ($request->items as $item) {
+            Team::where('id', $item['id'])->update([
+                'sort_id' => $item['sort_id']
+            ]);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => "{$this->title} order updated successfully."
+        ]);
+    }
+
 }
