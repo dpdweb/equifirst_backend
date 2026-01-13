@@ -12,7 +12,7 @@ class TeamController extends Controller
 
     public function index()
     {
-        return TeamResource::collection(Team::latest()->get());
+        return TeamResource::collection(Team::orderBy('sort_id', 'asc')->get());
     }
 
 }
