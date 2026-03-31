@@ -164,7 +164,7 @@ class PostController extends Controller
 
         $categories = PostCategory::all();
 
-        $selected_tags = $record->meta()->where('meta_key', 'tag')->pluck('meta_value')->toArray();
+        // $selected_tags = $record->meta()->where('meta_key', 'tag')->pluck('meta_value')->toArray();
 
         return view("{$this->viewPath}.edit", [
             'record' => $record,
@@ -172,7 +172,7 @@ class PostController extends Controller
             'faqs' => $faqs,
             'tags'  => $tags,
             'categories' => $categories,
-            'selected_tags' => $selected_tags,
+            // 'selected_tags' => $selected_tags,
             'title'  => "Edit {$this->singular}",
             'routePath' => $this->routePath,
             'singular'  => $this->singular,
