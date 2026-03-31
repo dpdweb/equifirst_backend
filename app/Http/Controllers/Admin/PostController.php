@@ -296,7 +296,7 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
 
-        $post->meta()->delete();
+        // $post->meta()->delete();
 
         if ($post->image) {
             $images = json_decode($post->image, true);
