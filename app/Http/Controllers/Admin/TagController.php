@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Tag;
+use App\Models\PostTag;
 use Illuminate\Support\Str;
 
 class TagController extends Controller
@@ -17,7 +17,8 @@ class TagController extends Controller
 
     public function index()
     {
-        $records = Tag::orderBy('created_at', 'desc')->get();
+
+        $records = PostTag::orderBy('created_at', 'desc')->get();
 
         return view("{$this->viewPath}.index", [
             'records'   => $records,
@@ -30,6 +31,7 @@ class TagController extends Controller
 
     public function create()
     {
+
         return view("{$this->viewPath}.create", [
             'title'     => "Add {$this->singular}",
             'routePath' => $this->routePath,
@@ -40,8 +42,9 @@ class TagController extends Controller
 
     public function store(Request $request)
     {
+
         $request->validate([
-            'name' => 'required|string|max:255|unique:tags,name',
+            'name' => 'required|string|max:255|unique:post_tags,name',
         ]);
 
         $slug = Str::slug($request->name);
@@ -49,12 +52,13 @@ class TagController extends Controller
         $originalSlug = $slug;
         $count = 1;
 
-        while (Tag::where('slug', $slug)->exists()) {
+        while (PostTag::where('slug', $slug)->exists()) {
             $slug = $originalSlug . '-' . $count;
             $count++;
         }
 
-        Tag::create([
+
+        PostTag::create([
             'name' => $request->name,
             'slug' => $slug,
         ]);
@@ -63,7 +67,7 @@ class TagController extends Controller
             ->with('success', "{$this->singular} Created!");
     }
 
-    public function edit(Tag $tag)
+    public function edit(PostTag $tag)
     {
         return view("{$this->viewPath}.edit", [
             'record'    => $tag,
@@ -74,10 +78,10 @@ class TagController extends Controller
         ]);
     }
 
-    public function update(Request $request, Tag $tag)
+    public function update(Request $request, PostTag $tag)
     {
         $request->validate([
-            'name' => 'required|string|max:255|unique:tags,name,' . $tag->id,
+            'name' => 'required|string|max:255|unique:post_tags,name,' . $tag->id,
         ]);
 
         $slug = Str::slug($request->name);
@@ -88,7 +92,7 @@ class TagController extends Controller
             $count = 1;
 
             while (
-                Tag::where('slug', $slug)
+                PostTag::where('slug', $slug)
                     ->where('id', '!=', $tag->id)
                     ->exists()
             ) {
@@ -100,20 +104,24 @@ class TagController extends Controller
             $slug = $tag->slug;
         }
 
+
         $tag->update([
             'name' => $request->name,
             'slug' => $slug,
         ]);
 
+
+
         return redirect()->route("{$this->routePath}.index")
             ->with('success', "{$this->singular} Updated!");
     }
 
-    public function destroy(Tag $tag)
+    public function destroy(PostTag $tag)
     {
         $tag->delete();
 
         return redirect()->route("{$this->routePath}.index")
             ->with('success', "{$this->singular} Deleted!");
     }
+
 }
