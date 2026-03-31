@@ -41,29 +41,45 @@
                 <tr>
                     <th>#</th>
                     <th>Name</th>
-                    <th>Category</th>
+                    <th>Slug</th>
+                    <th>Image</th>
+                    <th>Meta Information</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-@forelse($records as $record)
-<tr>
-    <td>{{ $loop->iteration }}</td>
-    <td>{{ $record->question }}</td>
-    <td>{{ $record->category->name ?? '—' }}</td>
-    <td>
-        <a href="{{ route($routePath . '.edit', $record) }}" class="text-success mx-2">
-            <i class="fas fa-marker" aria-hidden="true"></i>
-        </a>
-        <a href="#" onclick="confirmDelete('{{ route($routePath . '.destroy', $record) }}')" class="text-danger mx-2">
-            <i class="fa fa-trash" aria-hidden="true"></i>
-        </a>
-    </td>
-</tr>
-@empty
-<tr><td colspan="4">No records found.</td></tr>
-@endforelse
+                @forelse($records as $record)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $record->name }}</td>
+                    <td>{{ $record->slug }}</td>
+                    <td>
 
+                                            @if($record->image)
+                                                <img src="{{ asset('storage/' . $record->image) }}" width="200">
+                                            @endif
+                                              <br><br>
+                                                    <strong>Image Title:</strong> {{ $record->image_title }}<br>
+                                                    <strong>Image Alt:</strong> {{ $record->image_alt }}
+                    </td>
+                    <td>
+                        <strong>Meta Title:</strong> {{ $record->meta_title }}<br>
+                        <strong>Meta Description:</strong> {{ $record->meta_description }}<br>
+                        <strong>Meta Keywords:</strong> {{ $record->meta_keywords }}
+                    </td>
+                    <td>
+                        <a href="{{ route( $routePath . '.edit', $record) }}" class="text-success mx-2">
+                            <i class="fas fa-marker" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" onclick="confirmDelete('{{ route( $routePath . '.destroy', $record) }}')" class="text-danger mx-2">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
+
+                    </td>
+                </tr>
+                @empty
+                    <tr><td colspan="6">No records found.</td></tr>
+                @endforelse
             </tbody>
         </table>
 

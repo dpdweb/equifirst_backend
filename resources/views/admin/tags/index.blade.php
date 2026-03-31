@@ -41,29 +41,29 @@
                 <tr>
                     <th>#</th>
                     <th>Name</th>
-                    <th>Category</th>
+                    <th>Slug</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-@forelse($records as $record)
-<tr>
-    <td>{{ $loop->iteration }}</td>
-    <td>{{ $record->question }}</td>
-    <td>{{ $record->category->name ?? '—' }}</td>
-    <td>
-        <a href="{{ route($routePath . '.edit', $record) }}" class="text-success mx-2">
-            <i class="fas fa-marker" aria-hidden="true"></i>
-        </a>
-        <a href="#" onclick="confirmDelete('{{ route($routePath . '.destroy', $record) }}')" class="text-danger mx-2">
-            <i class="fa fa-trash" aria-hidden="true"></i>
-        </a>
-    </td>
-</tr>
-@empty
-<tr><td colspan="4">No records found.</td></tr>
-@endforelse
+                @forelse($records as $record)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $record->name }}</td>
+                    <td>{{ $record->slug }}</td>
+                    <td>
+                        <a href="{{ route( $routePath . '.edit', $record) }}" class="text-success mx-2">
+                            <i class="fas fa-marker" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" onclick="confirmDelete('{{ route( $routePath . '.destroy', $record) }}')" class="text-danger mx-2">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
 
+                    </td>
+                </tr>
+                @empty
+                    <tr><td colspan="6">No records found.</td></tr>
+                @endforelse
             </tbody>
         </table>
 

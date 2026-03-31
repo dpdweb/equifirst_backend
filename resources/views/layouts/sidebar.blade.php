@@ -40,15 +40,26 @@
                     </ul>
                 </li>
 
-
-
-
                 <li>
-                    <a href="{{ route('posts.index') }}" class="waves-effect">
-                        <i class="ti-pencil"></i>
-                        <span>Posts</span>
+                    <a href="{{ route('pages.index') }}" class="waves-effect">
+                        <i class="ti-user"></i>
+                        <span>Pages</span>
                     </a>
                 </li>
+
+                <li>
+                    <a href="#" class="has-arrow waves-effect" aria-expanded="false">
+                        <i class="ti-pencil-alt"></i>
+                        <span>Posts</span>
+                    </a>
+                    <ul class="sub-menu mm-collapse mm-show" aria-expanded="false" style="">
+                        <li><a href="{{ route('posts.index') }}">Posts</a></li>
+                        <li><a href="{{ route('post-categories.index') }}">Post Categories</a></li>
+                        <li><a href="{{ route('tags.index') }}">Post Tags</a></li>
+                    </ul>
+                </li>
+
+
                 <li>
                     <a href="{{ route('testimonials.index') }}" class="waves-effect">
                         <i class="ti-user"></i>

@@ -2,8 +2,7 @@
 @section('title')
     Create {{ $singular }}
 @endsection
-@section('css')
-@endsection
+
 @section('body')
 
     <body data-sidebar="dark">
@@ -14,7 +13,7 @@
                 Create {{ $singular }}
             @endslot
             @slot('subtitle')
-                <a href="{{ route($routePath . '.index') }}">Projects</a>
+                <a href="{{ route($routePath . '.index') }}">{{ $plural }}</a>
             @endslot
         @endcomponent
 
@@ -67,9 +66,6 @@
                                 <textarea name="answer" id="answer" class="form-control" rows="5" placeholder="Enter FAQ answer" required>{{ old('answer', $record->answer ?? '') }}</textarea>
                             </div>
 
-
-
-
                             <button type="submit" class="btn btn-primary">Submit</button>
 
                         </form>
@@ -81,5 +77,16 @@
 
     @endsection
     @section('scripts')
+        <script src="{{ URL::asset('assets/js/app.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('#post_ids').select2({
+                    placeholder: "Select Posts",
+                    allowClear: true
+                });
+            });
+        </script>
         <script src="{{ URL::asset('assets/js/app.js') }}"></script>
     @endsection

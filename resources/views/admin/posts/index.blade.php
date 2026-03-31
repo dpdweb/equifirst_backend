@@ -48,6 +48,7 @@
                                     <th>#</th>
                                     <th>Title</th>
                                     <th>Image</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -61,14 +62,42 @@
                                         } else {
                                             $image = $record->image;
                                         }
+
+                                        $statusClass = match($record->status) {
+                                            'publish' => 'badge bg-success',
+                                            'unpublish' => 'badge bg-warning',
+                                            'draft' => 'badge bg-secondary',
+                                            default => 'badge bg-secondary',
+                                        };
                                     @endphp
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $record->title }}</td>
+                                        <td>{{ $record->title }}<br><br>
+                                            <small>
+                                                   <strong>Meta Title:</strong> {{ $record->meta_title }}<br>
+                        <strong>Meta Description:</strong> {{ $record->meta_description }}<br>
+                        <strong>Meta Keywords:</strong> {{ $record->meta_keywords }}
+                                            </small>
+                                        </td>
                                         <td>
+                                            <div class="row">
+                                                <div class="col-5">
                                             @if (!empty($image))
-                                                <img src="{{ asset('storage/' . $image) }}" width="200" />
+                                                <img src="{{ asset('storage/' . $image) }}" width="150" height="150" /><br>
                                             @endif
+                                                </div>
+                                            <div class="col-7">
+                                                <small>
+                                            <strong>Alt Text:</strong> {{ $record->image_alt }}<br>
+                                            <strong>Title Text:</strong> {{ $record->image_title }}
+                                                </small>
+                                            </div>
+
+                                        </td>
+                                        <td>
+                                            <span class="{{ $statusClass }}">
+                                                {{ ucfirst($record->status) }}
+                                            </span>
                                         </td>
                                         <td>
                                             <a href="{{ route($routePath . '.edit', $record) }}"

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Faq;
+use App\Models\Post;
 use App\Models\FaqCategory;
 use Illuminate\Http\Request;
 
@@ -30,8 +31,12 @@ class FaqController extends Controller
     public function create()
     {
         $categories = FaqCategory::all();
+
+        $posts = Post::all();
+
         return view("{$this->viewPath}.create", [
             'categories' => $categories,
+            'posts'        => $posts,
             'title'      => "Add {$this->singular}",
             'routePath'  => $this->routePath,
             'singular'   => $this->singular,

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    Create Category
+    Edit {{ $singular }}
 @endsection
 @section('css')
 @endsection
@@ -11,10 +11,10 @@
     @section('content')
         @component('components.breadcrumb')
             @slot('page_title')
-                Create Category
+                Edit  {{ $singular }}
             @endslot
             @slot('subtitle')
-                <a href="{{ route('categories.index') }}">Categories</a>
+                <a href="{{ route( $routePath . '.index') }}">  {{ $plural }}</a>
             @endslot
         @endcomponent
 
@@ -24,7 +24,7 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h4 class="card-title">Category</h4>
+                        <h4 class="card-title">Edit  {{ $singular }}</h4>
                         <p class="card-title-desc"></p>
 
                         @if ($errors->any())
@@ -37,19 +37,17 @@
                             </div>
                         @endif
 
-                        <form action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route( $routePath . '.update', $record) }}" autocomplete="off" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
 
                         <div class="mb-3">
-                            <label for="name" class="form-label">Category Name</label>
-                            <input type="text" name="name" class="form-control" value="{{ old('name', $category->name ?? '') }}" required>
+                            <label for="name">Name</label>
+                            <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $record->name) }}">
                         </div>
 
-
-
-                        <button type="submit" class="btn btn-primary">Submit</button>
-
-                        </form>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
 
                     </div>
                 </div>

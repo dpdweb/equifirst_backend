@@ -5,13 +5,15 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HeroSliderController;
 use App\Http\Controllers\Admin\TeamController;
-use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\PostCategoryController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\FaqCategoryController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\TagController;
 use Illuminate\Support\Facades\Artisan;
 
 // Check environment
@@ -32,11 +34,16 @@ Route::prefix($prefix)->group(function () {
         Route::post('teams/sort-save', [TeamController::class, 'sortSave'])->name('teams.sort-save');
         Route::resource('teams', TeamController::class);
 
-
-        Route::resource('categories', CategoryController::class);
+        Route::resource('post-categories', PostCategoryController::class);
         Route::resource('posts', PostController::class);
+
+        Route::resource('tags', TagController::class);
+
+        Route::resource('pages', PageController::class);
+
         Route::resource('faq-categories', FaqCategoryController::class);
         Route::resource('faqs', FaqController::class);
+
         Route::resource('testimonials', TestimonialController::class);
 
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

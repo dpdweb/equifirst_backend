@@ -20,3 +20,5 @@ body[data-sidebar=dark] .navbar-brand-box { background-color:white !important; }
 
 .xen-bg-primary { background: #147a9e !important; }
 
+.select2-container--default .select2-selection--multiple .select2-selection__choice__display { padding-left: 13px !important; }
+

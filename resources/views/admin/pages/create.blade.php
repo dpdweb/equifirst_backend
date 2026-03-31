@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    Create Bayan
+    {{ $title }}
 @endsection
 @section('css')
 @endsection
@@ -11,10 +11,10 @@
     @section('content')
         @component('components.breadcrumb')
             @slot('page_title')
-                Create Bayan
+                {{ $title }}
             @endslot
             @slot('subtitle')
-                <a href="{{ route('bayans.index') }}">Bayans</a>
+                <a href="{{ route($routePath . '.index') }}">{{ $plural }}</a>
             @endslot
         @endcomponent
 
@@ -24,7 +24,7 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h4 class="card-title">Bayans</h4>
+                        <h4 class="card-title">{{ $singular }}</h4>
                         <p class="card-title-desc"></p>
 
                         @if ($errors->any())
@@ -37,55 +37,104 @@
                             </div>
                         @endif
 
-                        <form method="POST" action="{{ route('bayans.store') }}" autocomplete="off">
-                            @csrf
-                            <div class="mb-3">
-                                <label class="form-label" for="name">Name</label>
-                                <input type="text" class="form-control" id="name" name="name"
-                                    value="{{ old('name') }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="name_urdu">Urdu Name</label>
-                                <input type="text" class="form-control" id="name_urdu" name="name_urdu"
-                                    value="{{ old('name_urdu') }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="description">Description</label>
-                                <textarea class="form-control" id="description" name="description" required>{{ old('description') }}</textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="description_urdu">Urdu Description</label>
-                                <textarea class="form-control" id="description_urdu" name="description_urdu" required>{{ old('description_urdu') }}</textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="thumbnail">Thumbnail</label>
-                                <input type="text" class="form-control" id="thumbnail" name="thumbnail"
-                                    value="{{ old('thumbnail') }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="video_link">Video Link</label>
-                                <input type="text" class="form-control" id="video_link" name="video_link"
-                                    value="{{ old('video_link') }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="video_duration">Video Duration</label>
-                                <textarea class="form-control" id="video_duration" name="video_duration" required>{{ old('video_duration') }}</textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="category_id">Select Category</label>
-                                <select class="form-select" id="category_id" name="category_id" required>
-                                    <option value="">-- Select Category --</option>
-                                    @foreach($categories as $category)
-                                        <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
-                                            {{ $category->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
+<form action="{{ route($routePath . '.store') }}" method="POST" enctype="multipart/form-data">
+@csrf
 
-                            <button type="submit" class="btn btn-primary">Submit</button>
+<!-- Tabs Navigation -->
+<ul class="nav nav-tabs" id="pageTabs" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" data-bs-toggle="tab" href="#basic">Basic Info</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#seo">SEO Meta</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#hero">Hero Section</a>
+    </li>
 
-                        </form>
+</ul>
+
+<div class="tab-content pt-4">
+
+
+<div class="tab-pane fade show active" id="basic">
+
+    <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input name="title" class="form-control" value="{{ old('title') }}">
+    </div>
+
+</div>
+
+
+<div class="tab-pane fade" id="seo">
+
+    <div class="mb-3">
+        <label>Meta Title</label>
+        <input type="text" name="meta_title" class="form-control"
+            value="{{ old('meta_title', $record->meta_title ?? '') }}">
+        <small class="text-muted">Recommended: 50–60 characters</small>
+    </div>
+
+    <div class="mb-3">
+        <label>Meta Description</label>
+        <textarea name="meta_description" rows="3"
+            class="form-control">{{ old('meta_description', $record->meta_description ?? '') }}</textarea>
+        <small class="text-muted">Recommended: 150–160 characters</small>
+    </div>
+
+    <div class="mb-3">
+        <label>Meta Keywords</label>
+        <input type="text" name="meta_keywords" class="form-control"
+            value="{{ old('meta_keywords', $record->meta_keywords ?? '') }}">
+        <small class="text-muted">Comma separated (optional)</small>
+    </div>
+
+</div>
+
+
+<div class="tab-pane fade" id="hero">
+
+    <div class="mb-3">
+        <label class="form-label">Hero Section Title</label>
+        <input type="text" name="hero_title" class="form-control"
+            value="{{ old('hero_title') }}">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Hero Section Sub Title</label>
+        <input type="text" name="hero_subtitle" class="form-control"
+            value="{{ old('hero_subtitle') }}">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Hero Image</label>
+        <input type="file" name="hero_image" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Image Title</label>
+        <input type="text" name="hero_image_title" class="form-control"
+            value="{{ old('hero_image_title') }}">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Image Alt Text</label>
+        <input type="text" name="hero_image_alt" class="form-control"
+            value="{{ old('hero_image_alt') }}">
+    </div>
+
+</div>
+
+
+
+</div>
+
+<div class="mt-4">
+    <button type="submit" class="btn btn-primary">Submit</button>
+</div>
+
+</form>
 
                     </div>
                 </div>
@@ -94,5 +143,7 @@
 
     @endsection
     @section('scripts')
+        <script src="{{ URL::asset('assets/libs/tinymce/tinymce.min.js') }}"></script>
+        <script src="{{ URL::asset('assets/js/pages/form-editor.init.js') }}"></script>
         <script src="{{ URL::asset('assets/js/app.js') }}"></script>
     @endsection

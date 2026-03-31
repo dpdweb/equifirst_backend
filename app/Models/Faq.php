@@ -13,4 +13,15 @@ class Faq extends Model
     {
         return $this->belongsTo(FaqCategory::class, 'faq_category_id');
     }
+
+    public function posts()
+    {
+        return $this->belongsToMany(
+            Post::class,
+            'post_faqs_relations',
+            'faq_id',
+            'post_id'
+        );
+    }
+
 }

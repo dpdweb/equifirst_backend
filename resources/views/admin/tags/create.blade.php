@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    Create Category
+    Create {{ $singular }}
 @endsection
 @section('css')
 @endsection
@@ -11,10 +11,10 @@
     @section('content')
         @component('components.breadcrumb')
             @slot('page_title')
-                Create Category
+                Create {{ $singular }}
             @endslot
             @slot('subtitle')
-                <a href="{{ route('categories.index') }}">Categories</a>
+                <a href="{{ route( $routePath . '.index') }}"> {{ $plural }} </a>
             @endslot
         @endcomponent
 
@@ -24,7 +24,7 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h4 class="card-title">Category</h4>
+                        <h4 class="card-title">{{ $singular }}</h4>
                         <p class="card-title-desc"></p>
 
                         @if ($errors->any())
@@ -37,17 +37,16 @@
                             </div>
                         @endif
 
-                        <form action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route( $routePath . '.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Category Name</label>
-                            <input type="text" name="name" class="form-control" value="{{ old('name', $category->name ?? '') }}" required>
-                        </div>
+                            <div class="mb-3">
+                                <label for="name">Name</label>
+                                <input type="text" name="name" id="name" class="form-control" value="" placeholder="Name">
+                            </div>
 
 
-
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
 
                         </form>
 
