@@ -62,7 +62,7 @@ class PostController extends Controller
 
     $request->validate([
         'title' => 'required|string|max:255',
-        'excerpt' => 'nullable|string|max:255',
+        'excerpt' => 'required|string|max:255',
         'content' => 'required|string',
 
         'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
@@ -185,10 +185,25 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
 
         $request->validate([
-            'title'     => 'required|string|max:255',
-            'content'   => 'required|string',
-            'image'     => 'nullable|image|mimes:jpeg,png,jpg,gif',
-            'author_id' => 'nullable|exists:teams,id',
+            'title' => 'required|string|max:255',
+            'excerpt' => 'required|string|max:255',
+            'content' => 'required|string',
+
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'image_title' => 'nullable|string|max:255',
+            'image_alt' => 'nullable|string|max:255',
+
+            'author_id' => 'required|exists:teams,id',
+
+            'meta_title' => 'nullable|string|max:60',
+            'meta_description' => 'nullable|string|max:160',
+            'meta_keywords' => 'nullable|string',
+
+            'faq_ids' => 'nullable|array',
+            'faq_ids.*' => 'exists:faqs,id',
+
+            'tag_names' => 'nullable|array',
+            'tag_names.*' => 'string|max:50',
         ]);
 
         $faq_ids = $request->faq_ids ?? [];

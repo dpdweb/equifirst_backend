@@ -188,11 +188,50 @@
     @endsection
     @section('scripts')
         <script src="{{ URL::asset('assets/libs/tinymce/tinymce.min.js') }}"></script>
-        <script src="{{ URL::asset('assets/js/pages/form-editor.init.js') }}"></script>
+        {{-- <script src="{{ URL::asset('assets/js/pages/form-editor.init.js') }}"></script> --}}
+
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
         <script>
             $(document).ready(function() {
+
+
+                tinymce.init({
+                selector: '#elm1',
+                height: 400,
+
+                menubar: true,
+                plugins: 'image link media code lists',
+
+                toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | bullist numlist | link image media | code',
+
+                automatic_uploads: true,
+
+                relative_urls: false,
+                remove_script_host: false,
+                convert_urls: true,
+
+                images_upload_handler: function (blobInfo, success, failure) {
+
+                    let tokenMeta = document.querySelector('meta[name="csrf-token"]');
+
+                    let formData = new FormData();
+                    formData.append('file', blobInfo.blob());
+                    formData.append('_token', tokenMeta.getAttribute('content'));
+
+                    fetch("{{ route('upload.post.image') }}", {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        success(data.location); // full URL
+                    })
+                    .catch(() => {
+                        failure('Upload failed');
+                    });
+                }
+            });
 
             function updateOptions(selector) {
                 let selectedValues = $(selector).val() || [];

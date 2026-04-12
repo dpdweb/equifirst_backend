@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\TagController;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\Admin\EditorController;
 
 // Check environment
 $prefix = app()->environment('production') ? 'admin' : 'admin';
@@ -36,6 +37,8 @@ Route::prefix($prefix)->group(function () {
 
         Route::resource('post-categories', PostCategoryController::class);
         Route::resource('posts', PostController::class);
+
+        Route::post('/upload-image', [EditorController::class, 'upload'])->name('upload.post.image');
 
         Route::resource('tags', TagController::class);
 
