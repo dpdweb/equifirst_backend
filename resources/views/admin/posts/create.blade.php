@@ -4,6 +4,31 @@
 @endsection
 @section('css')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <style>
+/* 🔥 FIX TinyMCE dropdown transparency */
+.tox .tox-menu,
+.tox .tox-collection,
+.tox .tox-collection__group {
+    background: #ffffff !important;
+    opacity: 1 !important;
+}
+
+/* menu items */
+.tox .tox-collection__item {
+    background: #ffffff !important;
+}
+
+/* hover */
+.tox .tox-collection__item--active {
+    background: #f5f5f5 !important;
+}
+
+/* fix z-index (important with Bootstrap tabs/modals) */
+.tox-tinymce-aux {
+    z-index: 999999 !important;
+}
+</style>
 @endsection
 @section('body')
 
@@ -188,11 +213,94 @@
     @endsection
     @section('scripts')
         <script src="{{ URL::asset('assets/libs/tinymce/tinymce.min.js') }}"></script>
-        <script src="{{ URL::asset('assets/js/pages/form-editor.init.js') }}"></script>
+        {{-- <script src="{{ URL::asset('assets/js/pages/form-editor.init.js') }}"></script> --}}
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
         <script>
             $(document).ready(function() {
+
+
+            tinymce.init({
+                selector: '#elm1',
+                height: 400,
+
+                menubar: true,
+                plugins: 'image link media code lists',
+
+                toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | bullist numlist | link image media | code',
+
+                automatic_uploads: true,
+
+                /* 🔥 IMPORTANT FIX */
+                relative_urls: false,
+                remove_script_host: false,
+                convert_urls: true,
+
+                images_upload_handler: function (blobInfo, success, failure) {
+
+                    let tokenMeta = document.querySelector('meta[name="csrf-token"]');
+
+                    let formData = new FormData();
+                    formData.append('file', blobInfo.blob());
+                    formData.append('_token', tokenMeta.getAttribute('content'));
+
+                    fetch("{{ route('upload.post.image') }}", {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        success(data.location); // full URL
+                    })
+                    .catch(() => {
+                        failure('Upload failed');
+                    });
+                }
+            });
+
+    //         tinymce.init({
+
+    //             selector: '#elm1',
+    //             height: 400,
+
+    //             menubar: true,
+
+    //             plugins: 'image link media code lists',
+
+    //             toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | bullist numlist | link image media | code',
+
+    //             automatic_uploads: true,
+    //             images_upload_url: '/upload-image',
+
+    //             file_picker_types: 'image',
+
+    //             images_upload_handler: function (blobInfo, success, failure) {
+
+    //                 let formData = new FormData();
+    //                 formData.append('file', blobInfo.blob());
+
+    //                 formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+
+    //                 fetch("{{ route('upload.post.image') }}", {
+    //                     method: 'POST',
+    //                     body: formData
+    //                 })
+    //                 .then(res => res.json())
+    //                 .then(data => {
+    //                     if (data.location) {
+    //                         success(data.location);
+    //                     } else {
+    //                         failure('Invalid response');
+    //                     }
+    //                 })
+    //                 .catch(() => {
+    //                     failure('Upload failed');
+    //                 });
+    //             }
+
+    // });
+
+
 
             function updateOptions(selector) {
                 let selectedValues = $(selector).val() || [];

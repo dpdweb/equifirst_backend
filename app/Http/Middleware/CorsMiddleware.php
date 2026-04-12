@@ -10,7 +10,7 @@ class CorsMiddleware
     public function handle(Request $request, Closure $next)
     {
         // List of allowed origins
-        $allowedOrigins = ['https://www.equifirst.ae', 'https://equifirst.ae']; // Add more origins if needed
+        $allowedOrigins = ['https://www.equifirst.ae', 'https://equifirst.ae', 'http://localhost:3000', 'http://127.0.0.1:3000']; // Add more origins if needed
 
         // Get the Origin header from the request
         $origin = $request->headers->get('Origin');

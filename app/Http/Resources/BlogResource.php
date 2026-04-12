@@ -21,6 +21,7 @@ class BlogResource extends JsonResource
             'title' => $this->title,
             'slug'  => $this->slug,
             'image' => $small,
+            'excerpt' => $this->excerpt,
             'date'  => $this->date ?? $this->created_at->toDateString(),
             'views' => $this->views ?? 0,
         ];

@@ -62,7 +62,7 @@ class PostController extends Controller
 
     $request->validate([
         'title' => 'required|string|max:255',
-        'excerpt' => 'nullable|string|max:255',
+        'excerpt' => 'required|string|max:255',
         'content' => 'required|string',
 
         'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
@@ -81,6 +81,7 @@ class PostController extends Controller
         'tag_names' => 'nullable|array',
         'tag_names.*' => 'string|max:50',
     ]);
+
 
         $faq_ids = $request->faq_ids ?? [];
         $faq_ids = json_encode($faq_ids);

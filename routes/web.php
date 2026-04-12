@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\HeroSliderController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\PostCategoryController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\EditorController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\FaqCategoryController;
 use App\Http\Controllers\Admin\FaqController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\TagController;
 use Illuminate\Support\Facades\Artisan;
+
 
 // Check environment
 $prefix = app()->environment('production') ? 'admin' : 'admin';
@@ -36,6 +38,8 @@ Route::prefix($prefix)->group(function () {
 
         Route::resource('post-categories', PostCategoryController::class);
         Route::resource('posts', PostController::class);
+
+        Route::post('/upload-image', [EditorController::class, 'upload'])->name('upload.post.image');
 
         Route::resource('tags', TagController::class);
 
