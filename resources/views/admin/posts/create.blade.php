@@ -106,11 +106,12 @@
 
                             <div class="mb-3">
                                 <label for="author_id">Select Author</label>
-                                <select name="author_id" id="author_id" class="form-control" >
+                                <select name="author_id" id="author_id" class="form-control">
                                     <option value="">-- Select Team --</option>
+
                                     @foreach ($teams as $team)
                                         <option value="{{ $team->id }}"
-                                            {{ old('author_id') }}>
+                                            {{ old('author_id') == $team->id ? 'selected' : '' }}>
                                             {{ $team->name }}
                                         </option>
                                     @endforeach
